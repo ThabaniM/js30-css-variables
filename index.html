@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+  <div class="controls">
+    <label for="spacing">Spacing:</label>
+    <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+    <label for="blur">Blur:</label>
+    <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+    <label for="base">Base Color</label>
+    <input id="base" type="color" name="base" value="#ffc600">
+  </div>
+
+  <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
+
+  <style>
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+
+    body {
+      text-align: center;
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width: 100px;
+    }
+  </style>
+
+  <script>
+  'use strict';
+  (function programStart() {
+    const spacingInput = document.getElementById('spacing');
+    const blurInput = document.getElementById('blur');
+    const colorInput = document.getElementById('base');
+    const image = document.getElementsByTagName('img');
+
+    image[0].style.padding = `${spacingInput.value}px`; //set initial padding
+    image[0].style.filter = `blur(${blurInput.value}px)`; //set initial blur
+    image[0].style.backgroundColor = `${colorInput.value}`; // set inital color
+  
+
+    function changeSpacing(){
+  
+      image[0].style.padding = `${spacingInput.value}px`;
+
+    }
+
+    function blurImage(){
+      image[0].style.filter = `blur(${blurInput.value}px)`;
+    }
+
+    function changeColor(){
+      image[0].style.backgroundColor = `${colorInput.value}`;
+    }
+
+
+    spacingInput.addEventListener('input', changeSpacing);
+    blurInput.addEventListener('input', blurImage);
+    colorInput.addEventListener('input', changeColor);
+
+  
+  })();
+    
+  </script>
+
+</body>
+</html>
